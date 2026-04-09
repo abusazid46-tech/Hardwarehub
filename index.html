@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>HardwareHub Guwahati | Nearby Store Booking</title>
+    <title>HardwareHub Guwahati | Glassmorphic Store Booking</title>
     <!-- Bootstrap 5 + Icons + Fonts -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -14,19 +14,30 @@
             font-family: 'Inter', sans-serif;
         }
         body {
-            background: linear-gradient(135deg, #f0f4f8 0%, #e8edf4 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 100%);
+            background-attachment: fixed;
             min-height: 100vh;
             padding-bottom: 2rem;
         }
-        /* Elegant Sticky Header with thin blue line bottom */
+        /* Glassmorphic Base */
+        .glass {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 28px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        /* Elegant Sticky Header with glassmorphism */
         .sticky-header {
             position: sticky;
             top: 0;
             z-index: 1030;
-            background: rgba(255, 255, 255, 0.96);
-            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border-bottom: 2px solid transparent;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
         }
         .sticky-header::after {
             content: '';
@@ -35,39 +46,54 @@
             left: 0;
             right: 0;
             height: 2px;
-            background: linear-gradient(90deg, #2563eb, #3b82f6, #60a5fa);
+            background: linear-gradient(90deg, #ffffff80, #ffffff, #ffffff80);
             transform: scaleX(1);
         }
         /* Glassmorphism cards */
         .glass-card {
-            background: rgba(255, 255, 255, 0.75);
+            background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-radius: 28px;
-            border: 1px solid rgba(255,255,255,0.6);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.06);
+            border: 1px solid rgba(255,255,255,0.35);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
             transition: transform 0.2s ease, box-shadow 0.2s;
         }
         .glass-card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
         }
+        /* Product Card - Dark text for readability */
         .product-card {
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(4px);
             border-radius: 24px;
-            transition: all 0.25s ease;
-            border: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
             overflow: hidden;
+            cursor: pointer;
         }
         .product-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.15);
-            border-color: #e2e8f0;
+            border: 2px solid #3b82f6;
+            transform: translateY(-8px);
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.25);
+            background: white;
         }
         .product-img-placeholder {
             height: 150px;
             background-size: cover;
             background-position: center;
             border-radius: 20px 20px 0 0;
+            transition: transform 0.35s ease;
+        }
+        .product-card:hover .product-img-placeholder {
+            transform: scale(1.05);
+        }
+        .product-card h6, .product-card p, .product-card .fw-bold {
+            color: #1e293b !important;
+        }
+        .product-card .text-success {
+            color: #059669 !important;
         }
         .btn-soft {
             border-radius: 40px;
@@ -84,27 +110,35 @@
             transform: scale(0.97);
             background: linear-gradient(105deg, #152c4a, #1d4ed8);
         }
+        /* Store Card - Dark text */
         .store-card {
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(4px);
             border-radius: 20px;
-            transition: 0.2s;
-            border: 1px solid #eef2f6;
+            transition: 0.25s;
+            border: 1px solid rgba(0,0,0,0.08);
             cursor: pointer;
         }
         .store-card:hover {
-            border-color: #2563eb;
-            box-shadow: 0 5px 15px rgba(37,99,235,0.1);
+            border-color: #3b82f6;
+            background: white;
             transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
         .store-card.selected {
-            border: 2px solid #2563eb;
-            background: linear-gradient(135deg, #ffffff, #f0f7ff);
-            box-shadow: 0 8px 20px rgba(37,99,235,0.15);
+            border: 2px solid #3b82f6;
+            background: rgba(59, 130, 246, 0.1);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 8px 20px rgba(59,130,246,0.2);
+        }
+        .store-card strong, .store-card .small, .store-card span {
+            color: #1e293b !important;
         }
         .badge-distance {
             background: #e8f3ed;
-            color: #1e6f3f;
+            color: #166534 !important;
             font-weight: 600;
+            backdrop-filter: blur(2px);
         }
         .cart-preview-badge {
             position: relative;
@@ -124,30 +158,31 @@
             text-align: center;
         }
         .gradient-text {
-            background: linear-gradient(135deg, #1e3a5f, #3b82f6);
+            background: linear-gradient(135deg, #ffffff, #e0e7ff);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             font-weight: 800;
         }
         .hero-splash {
-            background: linear-gradient(107deg, #0a2b3e 0%, #1a4a6f 100%);
+            background: linear-gradient(107deg, rgba(10,43,62,0.7) 0%, rgba(26,74,111,0.7) 100%);
+            backdrop-filter: blur(8px);
             border-radius: 32px;
             overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.3);
         }
         @media (max-width: 768px) {
-            .hero-splash {
-                border-radius: 20px;
-            }
+            .hero-splash { border-radius: 20px; }
         }
         .nav-link-custom {
-            color: #1e3a5f;
+            color: white;
             font-weight: 500;
             transition: 0.2s;
-            position: relative;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
         }
         .nav-link-custom:hover {
-            color: #2563eb;
+            color: #bfdbfe;
+            transform: translateY(-1px);
         }
         /* Reminder Popup */
         .reminder-popup {
@@ -157,41 +192,88 @@
             z-index: 1050;
             max-width: 360px;
             animation: slideInUp 0.3s ease-out;
-            box-shadow: 0 20px 35px -10px rgba(0,0,0,0.2);
+            box-shadow: 0 20px 35px -10px rgba(0,0,0,0.25);
         }
         @keyframes slideInUp {
-            from {
-                transform: translateY(100px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
         .delivery-fee-badge {
-            background: #fef3c7;
+            background: rgba(254, 243, 199, 0.95);
             color: #b45309;
             font-size: 0.75rem;
             padding: 4px 10px;
             border-radius: 30px;
         }
         .selected-store-banner {
-            background: linear-gradient(135deg, #2563eb10, #3b82f610);
-            border-left: 4px solid #2563eb;
+            background: rgba(37, 99, 235, 0.2);
+            backdrop-filter: blur(8px);
+            border-left: 4px solid #3b82f6;
+            border-radius: 16px;
+        }
+        .text-white-important {
+            color: white !important;
+        }
+        .cart-summary-text {
+            color: white;
+        }
+        .btn-outline-light-custom {
+            border: 1px solid rgba(255,255,255,0.5);
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+        .btn-outline-light-custom:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        footer {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.7);
+        }
+        /* Modal glassmorphic */
+        .modal-content.glass-card {
+            background: rgba(30, 30, 50, 0.85);
+            backdrop-filter: blur(20px);
+            color: white;
+        }
+        .modal-content.glass-card .btn-close {
+            filter: invert(1);
+        }
+        .form-control, .input-group-text {
+            background: rgba(255,255,255,0.9);
+            border: none;
+        }
+        /* Cart sidebar text color */
+        .glass-card .text-white, .glass-card h5, .glass-card .d-flex span {
+            color: white !important;
+        }
+        .glass-card .text-warning {
+            color: #fbbf24 !important;
+        }
+        .glass-card .text-success {
+            color: #34d399 !important;
+        }
+        .glass-card .btn-soft-primary {
+            color: white;
+        }
+        /* Offcanvas text */
+        .offcanvas .text-white, .offcanvas h5, .offcanvas .d-flex span {
+            color: white !important;
+        }
+        .offcanvas .text-warning {
+            color: #fbbf24 !important;
         }
     </style>
 </head>
 <body>
 
-<!-- Elegant Sticky Header with thin blue gradient line -->
+<!-- Elegant Sticky Header with glassmorphism -->
 <header class="sticky-header py-2">
     <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-between">
             <div class="d-flex align-items-center gap-2">
-                <i class="fas fa-hard-hat fa-2x" style="color: #2563eb;"></i>
+                <i class="fas fa-hard-hat fa-2x text-white"></i>
                 <span class="fw-bold fs-4 gradient-text">HardwareHub</span>
-                <span class="badge assam-badge rounded-pill" style="background: #16653420; color:#166534;"><i class="fas fa-map-marker-alt me-1"></i>Guwahati, Assam</span>
+                <span class="badge rounded-pill" style="background: rgba(255,255,255,0.2); color:white;"><i class="fas fa-map-marker-alt me-1"></i>Guwahati, Assam</span>
             </div>
             <div class="d-none d-md-flex gap-4">
                 <a href="#" class="nav-link-custom text-decoration-none" id="navHome"><i class="fas fa-home me-1"></i>Home</a>
@@ -199,10 +281,10 @@
                 <a href="#" class="nav-link-custom text-decoration-none" id="navProducts"><i class="fas fa-tools me-1"></i>Products</a>
             </div>
             <div class="d-flex align-items-center gap-3">
-                <span id="userGreetingHeader" class="small fw-semibold d-none d-sm-inline"></span>
-                <button id="loginBtnHeader" class="btn btn-sm btn-outline-primary rounded-pill px-3"><i class="fas fa-user-circle"></i> Login</button>
+                <span id="userGreetingHeader" class="small fw-semibold text-white d-none d-sm-inline"></span>
+                <button id="loginBtnHeader" class="btn btn-sm btn-outline-light rounded-pill px-3"><i class="fas fa-user-circle"></i> Login</button>
                 <div class="cart-preview-badge" id="cartIconBtn">
-                    <i class="fas fa-shopping-bag fa-lg" style="color: #1e3a5f;"></i>
+                    <i class="fas fa-shopping-bag fa-lg text-white"></i>
                     <span id="headerCartCount" class="cart-count-bubble">0</span>
                 </div>
             </div>
@@ -210,13 +292,13 @@
     </div>
 </header>
 
-<!-- Hero Splash -->
+<!-- Hero Splash Glassmorphic -->
 <div class="container mt-4">
-    <div class="hero-splash p-4 p-md-5 text-white" style="background: linear-gradient(107deg, #0a2b3e 0%, #1a4a6f 100%);">
+    <div class="hero-splash p-4 p-md-5 text-white">
         <div class="row align-items-center">
             <div class="col-md-7">
                 <h1 class="display-5 fw-bold"><i class="fas fa-truck-fast me-2"></i>Hardware Store Guwahati</h1>
-                <p class="lead">Cement • Steel • Bricks • Stones • Electricals — Book from nearby stores. Pay 10% advance.</p>
+                <p class="lead">Cement • Steel • Bricks • Stones • Electricals — Book from nearby stores. Pay 10% advance. Glassmorphic experience.</p>
                 <button class="btn btn-light rounded-pill px-4 fw-semibold" id="exploreBtn">Explore Products <i class="fas fa-arrow-right ms-2"></i></button>
             </div>
             <div class="col-md-5 d-none d-md-block">
@@ -233,31 +315,29 @@
             <!-- Nearby Stores Section -->
             <div class="glass-card p-3 mb-4" id="storesSection">
                 <div class="d-flex justify-content-between align-items-center flex-wrap">
-                    <h5 class="mb-2"><i class="fas fa-map-marker-alt me-2 text-danger"></i>Nearby Hardware Stores in Guwahati</h5>
+                    <h5 class="mb-2 text-white"><i class="fas fa-map-marker-alt me-2 text-danger"></i>Nearby Hardware Stores in Guwahati</h5>
                     <div class="d-flex gap-3">
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="radiusFilter" id="radius5km" value="5" checked>
-                            <label class="form-check-label" for="radius5km">Within 5km</label>
+                            <label class="form-check-label text-white" for="radius5km">Within 5km</label>
                         </div>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="radiusFilter" id="radius10km" value="10">
-                            <label class="form-check-label" for="radius10km">Within 10km</label>
+                            <label class="form-check-label text-white" for="radius10km">Within 10km</label>
                         </div>
-                        <button id="refreshStoresBtn" class="btn btn-sm btn-outline-secondary rounded-pill"><i class="fas fa-sync-alt"></i> Refresh</button>
+                        <button id="refreshStoresBtn" class="btn btn-sm btn-outline-light rounded-pill"><i class="fas fa-sync-alt"></i> Refresh</button>
                     </div>
                 </div>
-                <div id="storesContainer" class="row g-3 mt-2">
-                    <div class="col-12 text-center py-3"><div class="spinner-border text-primary" role="status"></div> Locating stores in Guwahati...</div>
-                </div>
+                <div id="storesContainer" class="row g-3 mt-2"></div>
             </div>
 
             <!-- Selected Store Banner -->
-            <div id="selectedStoreBanner" class="selected-store-banner rounded-3 p-3 mb-3" style="display: none;">
+            <div id="selectedStoreBanner" class="selected-store-banner p-3 mb-3" style="display: none;">
                 <div class="d-flex justify-content-between align-items-center">
-                    <div>
+                    <div class="text-white">
                         <i class="fas fa-check-circle text-primary me-2"></i>
                         <strong id="selectedStoreName">Store Name</strong> selected
-                        <span class="ms-2 text-muted small" id="selectedStoreDistance"></span>
+                        <span class="ms-2 text-white-50 small" id="selectedStoreDistance"></span>
                     </div>
                     <span class="delivery-fee-badge" id="deliveryFeeBadge">Delivery: ₹0</span>
                 </div>
@@ -265,29 +345,27 @@
 
             <!-- Product Catalog -->
             <div class="glass-card p-3" id="productsSection">
-                <h5 class="mb-3"><i class="fas fa-tools me-2 text-warning"></i>Hardware Products</h5>
+                <h5 class="mb-3 text-white"><i class="fas fa-tools me-2 text-warning"></i>Hardware Products</h5>
                 <div class="row g-3" id="productList"></div>
             </div>
         </div>
 
-        <!-- RIGHT COL: Cart Sidebar -->
+        <!-- RIGHT COL: Cart Sidebar Glassmorphic -->
         <div class="col-lg-4 d-none d-lg-block">
             <div class="glass-card p-3 sticky-top" style="top: 90px;">
-                <h5><i class="fas fa-shopping-cart me-2"></i>Cart Summary <span id="desktopCartCount" class="badge bg-secondary rounded-pill">0</span></h5>
-                <hr>
-                <div id="desktopCartItems" class="small mb-3" style="max-height: 250px; overflow-y: auto;">
-                    <p class="text-muted">Cart is empty</p>
-                </div>
-                <div class="border-top pt-2">
-                    <div class="d-flex justify-content-between">
+                <h5 class="text-white"><i class="fas fa-shopping-cart me-2"></i>Cart Summary <span id="desktopCartCount" class="badge bg-light text-dark rounded-pill">0</span></h5>
+                <hr class="text-white-50">
+                <div id="desktopCartItems" class="small mb-3" style="max-height: 250px; overflow-y: auto; color: white;"></div>
+                <div class="border-top border-white-30 pt-2">
+                    <div class="d-flex justify-content-between text-white">
                         <span>Subtotal:</span>
                         <span id="desktopSubtotal">₹0</span>
                     </div>
-                    <div class="d-flex justify-content-between text-warning" id="deliveryRow">
+                    <div class="d-flex justify-content-between text-warning">
                         <span>Delivery Fee:</span>
                         <span id="desktopDeliveryFee">₹0</span>
                     </div>
-                    <div class="d-flex justify-content-between fw-bold mt-1">
+                    <div class="d-flex justify-content-between fw-bold text-white mt-1">
                         <span>Total:</span>
                         <span id="desktopCartTotal">₹0</span>
                     </div>
@@ -297,53 +375,97 @@
                     </div>
                 </div>
                 <button id="checkoutBtnDesktop" class="btn btn-soft-primary w-100 mt-3" disabled><i class="fas fa-lock"></i> Proceed to Book</button>
-                <div class="small text-muted mt-2 text-center" id="deliveryNote"></div>
+                <div class="small mt-2 text-center text-white-50" id="deliveryNote"></div>
             </div>
         </div>
     </div>
-    <footer class="text-center mt-5 text-muted small">
-        <i class="fas fa-shield-alt"></i> Delivery charges: ₹600 (up to 5km) | ₹900 (5-10km) • 10% advance • 90% on delivery
+    <footer class="text-center mt-5">
+        <i class="fas fa-shield-alt"></i> Delivery: ₹600 (≤5km) | ₹900 (5-10km) • 10% advance • 90% on delivery
     </footer>
 </div>
 
-<!-- Offcanvas Cart -->
-<div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas">
+<!-- Offcanvas Cart Glassmorphic -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas" style="background: rgba(20,20,40,0.95); backdrop-filter: blur(16px);">
     <div class="offcanvas-header">
-        <h5 class="offcanvas-title"><i class="fas fa-shopping-bag"></i> Your Cart</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+        <h5 class="offcanvas-title text-white"><i class="fas fa-shopping-bag"></i> Your Cart</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
     </div>
     <div class="offcanvas-body">
-        <div id="offcanvasCartItems" class="mb-3"></div>
-        <div class="border-top pt-3">
-            <div class="d-flex justify-content-between"><span>Subtotal:</span><span id="offcanvasSubtotal">₹0</span></div>
+        <div id="offcanvasCartItems" class="mb-3 text-white"></div>
+        <div class="border-top border-white-30 pt-3">
+            <div class="d-flex justify-content-between text-white"><span>Subtotal:</span><span id="offcanvasSubtotal">₹0</span></div>
             <div class="d-flex justify-content-between text-warning"><span>Delivery:</span><span id="offcanvasDeliveryFee">₹0</span></div>
-            <div class="d-flex justify-content-between fw-bold"><span>Total:</span><span id="offcanvasTotal">₹0</span></div>
+            <div class="d-flex justify-content-between fw-bold text-white"><span>Total:</span><span id="offcanvasTotal">₹0</span></div>
             <div class="d-flex justify-content-between text-success"><span>Advance (10%):</span><span id="offcanvasAdvance">₹0</span></div>
             <button id="checkoutBtnOffcanvas" class="btn btn-soft-primary w-100 mt-3" disabled>Proceed to Book</button>
         </div>
     </div>
 </div>
 
-<!-- Login Modal -->
+<!-- Checkout Calculation Popup Modal (Glassmorphic) -->
+<div class="modal fade" id="checkoutCalculationModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content glass-card">
+            <div class="modal-header border-0">
+                <h5 class="modal-title text-white"><i class="fas fa-receipt me-2"></i>Order Summary</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div id="calcStoreInfo" class="mb-3 p-2 rounded" style="background: rgba(255,255,255,0.1);">
+                    <small><i class="fas fa-store"></i> <span id="calcStoreName">No store selected</span></small>
+                </div>
+                <div class="mb-3" id="calcItemsList" style="max-height: 200px; overflow-y: auto;"></div>
+                <div class="border-top border-white-30 pt-2">
+                    <div class="d-flex justify-content-between text-white">
+                        <span>Subtotal:</span>
+                        <span id="calcSubtotal">₹0</span>
+                    </div>
+                    <div class="d-flex justify-content-between text-warning">
+                        <span>Delivery Fee:</span>
+                        <span id="calcDeliveryFee">₹0</span>
+                    </div>
+                    <div class="d-flex justify-content-between fw-bold text-white mt-2">
+                        <span>Total Amount:</span>
+                        <span id="calcTotal">₹0</span>
+                    </div>
+                    <div class="d-flex justify-content-between text-success mt-1">
+                        <span>Advance (10% to pay now):</span>
+                        <span id="calcAdvance">₹0</span>
+                    </div>
+                    <div class="d-flex justify-content-between text-white-50 mt-1">
+                        <span>Balance (90% on delivery):</span>
+                        <span id="calcBalance">₹0</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-outline-light rounded-pill" data-bs-dismiss="modal">Close</button>
+                <button id="confirmPaymentFromCalc" class="btn btn-soft-primary rounded-pill">Proceed to Pay 10%</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Login Modal Glassmorphic -->
 <div class="modal fade" id="loginModal" data-bs-backdrop="static" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content glass-card border-0">
+        <div class="modal-content glass-card">
             <div class="modal-header border-0">
-                <h5 class="modal-title fw-bold"><i class="fas fa-mobile-alt me-2"></i>Login Required</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                <h5 class="modal-title text-white"><i class="fas fa-mobile-alt me-2"></i>Login Required</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
                 <div id="loginStep1">
-                    <label class="form-label fw-semibold">Mobile Number</label>
+                    <label class="form-label text-white">Mobile Number</label>
                     <input type="tel" id="mobileNumber" class="form-control mb-3" placeholder="10 digits" maxlength="10">
                     <button id="sendOtpBtn" class="btn btn-soft-primary w-100">Send OTP</button>
                 </div>
                 <div id="loginStep2" style="display:none;">
-                    <label class="form-label fw-semibold">6-digit OTP</label>
+                    <label class="form-label text-white">6-digit OTP</label>
                     <input type="text" id="otpCode" class="form-control mb-3" placeholder="Any 6 digits" maxlength="6">
                     <button id="verifyOtpBtn" class="btn btn-success w-100">Verify & Login</button>
                 </div>
-                <div id="loginMessage" class="mt-3 small text-center"></div>
+                <div id="loginMessage" class="mt-3 small text-center text-white"></div>
             </div>
         </div>
     </div>
@@ -353,12 +475,12 @@
 <div class="modal fade" id="paymentModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content glass-card">
-            <div class="modal-header">
-                <h5 class="modal-title"><i class="fab fa-google-pay me-2"></i>Pay 10% Advance</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            <div class="modal-header border-0">
+                <h5 class="modal-title text-white"><i class="fab fa-google-pay me-2"></i>Pay 10% Advance</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <p class="text-muted">Advance amount: <strong id="modalAdvanceAmount">₹0</strong></p>
+                <p class="text-white">Advance amount: <strong id="modalAdvanceAmount">₹0</strong></p>
                 <input type="text" class="form-control mb-2" placeholder="UPI / Card" value="4242 4242 4242 4242">
                 <div class="row">
                     <div class="col-6"><input class="form-control" placeholder="Expiry" value="12/28"></div>
@@ -370,17 +492,17 @@
     </div>
 </div>
 
-<!-- Reminder Popup -->
+<!-- Reminder Popup Glass -->
 <div id="reminderPopup" class="reminder-popup" style="display: none;">
-    <div class="card shadow-lg border-0 rounded-4">
+    <div class="card shadow-lg border-0 rounded-4" style="background: rgba(30,30,50,0.95); backdrop-filter: blur(16px);">
         <div class="card-body p-3">
             <div class="d-flex justify-content-between align-items-start">
-                <div><i class="fas fa-shopping-cart text-primary me-2"></i><strong>Still shopping?</strong><p class="small mb-1">Cart has <span id="reminderCartCount">0</span> items.</p></div>
-                <button id="closeReminderBtn" class="btn-close"></button>
+                <div class="text-white"><i class="fas fa-shopping-cart text-primary me-2"></i><strong>Still shopping?</strong><p class="small mb-1">Cart has <span id="reminderCartCount">0</span> items.</p></div>
+                <button id="closeReminderBtn" class="btn-close btn-close-white"></button>
             </div>
             <div class="mt-2 d-flex gap-2">
                 <button id="reminderCheckoutBtn" class="btn btn-sm btn-soft-primary flex-fill">Checkout</button>
-                <button id="reminderContinueBtn" class="btn btn-sm btn-outline-secondary flex-fill">Add More</button>
+                <button id="reminderContinueBtn" class="btn btn-sm btn-outline-light flex-fill">Add More</button>
             </div>
         </div>
     </div>
@@ -436,11 +558,11 @@
 
     function renderStores() {
         const container = document.getElementById("storesContainer");
-        container.innerHTML = `<div class="col-12 text-center py-3"><div class="spinner-border text-primary"></div> Finding stores in Guwahati...</div>`;
+        container.innerHTML = `<div class="col-12 text-center py-3"><div class="spinner-border text-light" role="status"></div> Locating stores...</div>`;
         setTimeout(() => {
             const stores = filterStores(currentFilterRadius);
             if (stores.length === 0) {
-                container.innerHTML = `<div class="col-12 alert alert-warning">⚠️ No stores within ${currentFilterRadius} km.</div>`;
+                container.innerHTML = `<div class="col-12 alert alert-warning text-white">⚠️ No stores within ${currentFilterRadius} km.</div>`;
                 return;
             }
             container.innerHTML = stores.map(store => `
@@ -451,12 +573,10 @@
                         <button class="btn btn-sm btn-outline-primary rounded-pill select-store-btn" data-store='${JSON.stringify(store)}'>Select</button>
                     </div>
                 </div>`).join('');
-            
             document.querySelectorAll('.select-store-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    const store = JSON.parse(btn.getAttribute('data-store'));
-                    selectStore(store);
+                    selectStore(JSON.parse(btn.getAttribute('data-store')));
                 });
             });
         }, 400);
@@ -465,13 +585,10 @@
     function selectStore(store) {
         selectedStore = store;
         selectedStoreDistance = store.distance;
-        
-        // Update UI highlight
         document.querySelectorAll('.store-card').forEach(card => card.classList.remove('selected'));
         const selectedCard = document.querySelector(`.store-card[data-store-id="${store.id}"]`);
         if (selectedCard) selectedCard.classList.add('selected');
         
-        // Show banner
         const banner = document.getElementById("selectedStoreBanner");
         document.getElementById("selectedStoreName").innerText = store.name;
         document.getElementById("selectedStoreDistance").innerHTML = `📍 ${store.distance} km away`;
@@ -479,20 +596,8 @@
         document.getElementById("deliveryFeeBadge").innerHTML = `Delivery: ₹${deliveryFee}`;
         banner.style.display = "block";
         
-        // Auto-scroll to products section smoothly
         document.getElementById("productsSection").scrollIntoView({ behavior: "smooth", block: "start" });
-        
-        // Update cart with new delivery fee
         updateAllCartUI();
-        
-        // Show success toast-like feedback
-        const toastMsg = document.createElement('div');
-        toastMsg.className = 'alert alert-success alert-dismissible fade show position-fixed top-50 start-50 translate-middle shadow-lg';
-        toastMsg.style.zIndex = '9999';
-        toastMsg.style.minWidth = '280px';
-        toastMsg.innerHTML = `<i class="fas fa-check-circle me-2"></i> ${store.name} selected!<br><small>Delivery: ₹${deliveryFee} (${store.distance} km)</small>`;
-        document.body.appendChild(toastMsg);
-        setTimeout(() => toastMsg.remove(), 2000);
     }
 
     function renderProducts() {
@@ -514,11 +619,7 @@
         
         document.querySelectorAll('.add-cart').forEach(btn => {
             btn.addEventListener('click', () => {
-                if (!selectedStore) {
-                    alert("⚠️ Please select a nearby store first before adding items to cart.");
-                    document.getElementById("storesSection").scrollIntoView({ behavior: "smooth" });
-                    return;
-                }
+                if (!selectedStore) { alert("⚠️ Please select a nearby store first."); document.getElementById("storesSection").scrollIntoView({ behavior: "smooth" }); return; }
                 const id = btn.dataset.id, name = btn.dataset.name, price = parseFloat(btn.dataset.price);
                 let qty = parseInt(document.getElementById(`qty-${id}`).value) || 1;
                 if (qty > 100) qty = 100;
@@ -538,20 +639,9 @@
 
     function removeCartItem(id) { delete cart[id]; saveCart(); updateAllCartUI(); resetReminderTimer(); }
 
-    function getCartSubtotal() {
-        return Object.values(cart).reduce((sum, item) => sum + (item.quantity * item.product.price), 0);
-    }
-
-    function getDeliveryFeeForCart() {
-        if (!selectedStoreDistance) return 0;
-        return getDeliveryFee(selectedStoreDistance);
-    }
-
-    function getTotalWithDelivery() {
-        const subtotal = getCartSubtotal();
-        const delivery = getDeliveryFeeForCart();
-        return subtotal + delivery;
-    }
+    function getCartSubtotal() { return Object.values(cart).reduce((sum, item) => sum + (item.quantity * item.product.price), 0); }
+    function getDeliveryFeeForCart() { return selectedStoreDistance ? getDeliveryFee(selectedStoreDistance) : 0; }
+    function getTotalWithDelivery() { return getCartSubtotal() + getDeliveryFeeForCart(); }
 
     function updateAllCartUI() {
         const subtotal = getCartSubtotal();
@@ -571,7 +661,7 @@
         document.getElementById("offcanvasAdvance").innerText = `₹${advance.toFixed(2)}`;
         
         const cartHtml = Object.values(cart).map(item => `<div class="d-flex justify-content-between align-items-center mb-2"><span>${item.product.name} x${item.quantity}</span><span>₹${item.quantity * item.product.price} <button class="btn btn-sm text-danger remove-item" data-id="${item.product.id}"><i class="fas fa-trash"></i></button></span></div>`).join('');
-        const emptyMsg = '<p class="text-muted">Cart empty</p>';
+        const emptyMsg = '<p class="text-white-50">Cart empty</p>';
         document.getElementById("desktopCartItems").innerHTML = cartHtml || emptyMsg;
         document.getElementById("offcanvasCartItems").innerHTML = cartHtml || emptyMsg;
         
@@ -582,38 +672,49 @@
         document.querySelectorAll('.remove-item').forEach(btn => btn.addEventListener('click', (e) => removeCartItem(btn.dataset.id)));
         
         const deliveryNote = document.getElementById("deliveryNote");
-        if (selectedStoreDistance) {
-            deliveryNote.innerHTML = `<i class="fas fa-truck"></i> Delivery: ₹${delivery} (${selectedStoreDistance} km)`;
-        } else {
-            deliveryNote.innerHTML = `<i class="fas fa-store"></i> Select a store to see delivery charges`;
-        }
+        if (selectedStoreDistance) deliveryNote.innerHTML = `<i class="fas fa-truck"></i> Delivery: ₹${delivery} (${selectedStoreDistance} km)`;
+        else deliveryNote.innerHTML = `<i class="fas fa-store"></i> Select a store`;
         
-        if (document.getElementById("reminderCartCount")) 
-            document.getElementById("reminderCartCount").innerText = itemCount;
+        if (document.getElementById("reminderCartCount")) document.getElementById("reminderCartCount").innerText = itemCount;
+    }
+
+    function showCheckoutCalculationPopup() {
+        if (!selectedStore) { alert("Please select a store first"); return; }
+        if (Object.keys(cart).length === 0) { alert("Cart is empty"); return; }
+        const subtotal = getCartSubtotal();
+        const delivery = getDeliveryFeeForCart();
+        const total = subtotal + delivery;
+        const advance = total * 0.1;
+        const balance = total - advance;
+        
+        document.getElementById("calcStoreName").innerHTML = `${selectedStore.name} (${selectedStoreDistance} km)`;
+        const itemsHtml = Object.values(cart).map(item => `<div class="d-flex justify-content-between mb-1 text-white"><span>${item.product.name} x${item.quantity}</span><span>₹${item.quantity * item.product.price}</span></div>`).join('');
+        document.getElementById("calcItemsList").innerHTML = itemsHtml || '<p class="text-white-50">No items</p>';
+        document.getElementById("calcSubtotal").innerHTML = `₹${subtotal}`;
+        document.getElementById("calcDeliveryFee").innerHTML = `₹${delivery}`;
+        document.getElementById("calcTotal").innerHTML = `₹${total}`;
+        document.getElementById("calcAdvance").innerHTML = `₹${advance.toFixed(2)}`;
+        document.getElementById("calcBalance").innerHTML = `₹${balance.toFixed(2)}`;
+        
+        new bootstrap.Modal(document.getElementById('checkoutCalculationModal')).show();
+    }
+
+    function proceedToPaymentFromCalc() {
+        if (!selectedStore) return;
+        const total = getTotalWithDelivery();
+        const advance = total * 0.1;
+        document.getElementById("modalAdvanceAmount").innerText = `₹${advance.toFixed(2)}`;
+        bootstrap.Modal.getInstance(document.getElementById('checkoutCalculationModal')).hide();
+        new bootstrap.Modal(document.getElementById('paymentModal')).show();
     }
 
     function saveCart() { localStorage.setItem("hardwareCart", JSON.stringify(cart)); }
     function loadCart() { const saved = localStorage.getItem("hardwareCart"); if(saved) { cart = JSON.parse(saved); updateAllCartUI(); } }
 
-    // Reminder Popup (20 sec)
-    function showReminderPopup() {
-        const itemCount = Object.values(cart).reduce((sum, i) => sum + i.quantity, 0);
-        if (itemCount > 0 && !reminderShown && selectedStore) {
-            document.getElementById("reminderPopup").style.display = "block";
-            reminderShown = true;
-        }
-    }
-    function resetReminderTimer() {
-        if (reminderTimer) clearTimeout(reminderTimer);
-        reminderShown = false;
-        document.getElementById("reminderPopup").style.display = "none";
-        if (Object.keys(cart).length > 0 && selectedStore) {
-            reminderTimer = setTimeout(showReminderPopup, 20000);
-        }
-    }
-    function closeReminder() { document.getElementById("reminderPopup").style.display = "none"; reminderShown = true; if(reminderTimer) clearTimeout(reminderTimer); }
+    function showReminderPopup() { const itemCount = Object.values(cart).reduce((sum,i)=>sum+i.quantity,0); if(itemCount>0 && !reminderShown && selectedStore) { document.getElementById("reminderPopup").style.display="block"; reminderShown=true; } }
+    function resetReminderTimer() { if(reminderTimer) clearTimeout(reminderTimer); reminderShown=false; document.getElementById("reminderPopup").style.display="none"; if(Object.keys(cart).length>0 && selectedStore) reminderTimer=setTimeout(showReminderPopup,20000); }
+    function closeReminder() { document.getElementById("reminderPopup").style.display="none"; reminderShown=true; if(reminderTimer) clearTimeout(reminderTimer); }
 
-    // Login & Checkout
     function updateUserUI() {
         const loginBtn = document.getElementById("loginBtnHeader");
         if (loggedInUser) {
@@ -646,33 +747,29 @@
                 document.getElementById("loginStep2").style.display = "none";
                 document.getElementById("mobileNumber").value = "";
                 document.getElementById("otpCode").value = "";
-                if (pendingCheckout) { pendingCheckout = false; proceedToPayment(); }
+                document.getElementById("loginMessage").innerHTML = "";
+                if (pendingCheckout) { pendingCheckout = false; showCheckoutCalculationPopup(); }
             } else { document.getElementById("loginMessage").innerHTML = '<span class="text-danger">Invalid OTP</span>'; }
         };
     }
     let pendingCheckout = false;
-    function proceedToPayment() {
-        if (!selectedStore) { alert("Please select a store first"); return; }
-        const total = getTotalWithDelivery();
-        if (total === 0) { alert("Cart is empty"); return; }
-        const advance = total * 0.1;
-        document.getElementById("modalAdvanceAmount").innerText = `₹${advance.toFixed(2)}`;
-        new bootstrap.Modal(document.getElementById('paymentModal')).show();
-    }
     function checkoutFlow() {
         if (!selectedStore) { alert("⚠️ Please select a hardware store first"); document.getElementById("storesSection").scrollIntoView({ behavior: "smooth" }); return; }
+        if (Object.keys(cart).length === 0) { alert("Cart is empty"); return; }
         if (!loggedInUser) { pendingCheckout = true; new bootstrap.Modal(document.getElementById('loginModal')).show(); }
-        else { proceedToPayment(); }
+        else { showCheckoutCalculationPopup(); }
     }
+    
     document.getElementById("simulatePayBtn").addEventListener("click", () => {
         const total = getTotalWithDelivery();
         const advance = total * 0.1;
         bootstrap.Modal.getInstance(document.getElementById('paymentModal')).hide();
         setTimeout(() => {
-            alert(`✅ Advance ₹${advance.toFixed(2)} paid! Remaining 90% (₹${(total - advance).toFixed(2)}) due on delivery.\nStore: ${selectedStore?.name}\nDelivery charge included.`);
+            alert(`✅ Advance ₹${advance.toFixed(2)} paid! Remaining 90% (₹${(total - advance).toFixed(2)}) due on delivery.\nStore: ${selectedStore?.name}\nDelivery included.`);
             cart = {}; saveCart(); updateAllCartUI(); closeReminder();
         }, 100);
     });
+    document.getElementById("confirmPaymentFromCalc").addEventListener("click", proceedToPaymentFromCalc);
     document.getElementById("checkoutBtnDesktop").addEventListener("click", checkoutFlow);
     document.getElementById("checkoutBtnOffcanvas").addEventListener("click", checkoutFlow);
     document.getElementById("loginBtnHeader").addEventListener("click", () => new bootstrap.Modal(document.getElementById('loginModal')).show());

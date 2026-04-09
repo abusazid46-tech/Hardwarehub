@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>HardwareHub Guwahati | Nearby Store Booking</title>
+    <!-- Bootstrap 5 + Icons + Fonts -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8edf4 100%);
+            min-height: 100vh;
+            padding-bottom: 2rem;
+        }
+        /* Elegant Sticky Header with thin blue line bottom */
+        .sticky-header {
+            position: sticky;
+            top: 0;
+            z-index: 1030;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(12px);
+            border-bottom: 2px solid transparent;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+        }
+        .sticky-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #2563eb, #3b82f6, #60a5fa);
+            transform: scaleX(1);
+        }
+        /* Glassmorphism cards */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(12px);
+            border-radius: 28px;
+            border: 1px solid rgba(255,255,255,0.6);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.06);
+            transition: transform 0.2s ease, box-shadow 0.2s;
+        }
+        .glass-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .product-card {
+            background: white;
+            border-radius: 24px;
+            transition: all 0.25s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.15);
+            border-color: #e2e8f0;
+        }
+        .product-img-placeholder {
+            height: 150px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px 20px 0 0;
+        }
+        .btn-soft {
+            border-radius: 40px;
+            padding: 8px 20px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .btn-soft-primary {
+            background: linear-gradient(105deg, #1e3a5f, #2563eb);
+            color: white;
+            border: none;
+        }
+        .btn-soft-primary:hover {
+            transform: scale(0.97);
+            background: linear-gradient(105deg, #152c4a, #1d4ed8);
+        }
+        .store-card {
+            background: white;
+            border-radius: 20px;
+            transition: 0.2s;
+            border: 1px solid #eef2f6;
+        }
+        .store-card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.05);
+        }
+        .badge-distance {
+            background: #e8f3ed;
+            color: #1e6f3f;
+            font-weight: 600;
+        }
+        .cart-preview-badge {
+            position: relative;
+            cursor: pointer;
+        }
+        .cart-count-bubble {
+            position: absolute;
+            top: -8px;
+            right: -12px;
+            background: #dc2626;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: bold;
+            border-radius: 30px;
+            padding: 2px 7px;
+            min-width: 20px;
+            text-align: center;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #1e3a5f, #3b82f6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 800;
+        }
+        .hero-splash {
+            background: linear-gradient(107deg, #0a2b3e 0%, #1a4a6f 100%);
+            border-radius: 32px;
+            overflow: hidden;
+        }
+        @media (max-width: 768px) {
+            .hero-splash {
+                border-radius: 20px;
+            }
+        }
+        .nav-link-custom {
+            color: #1e3a5f;
+            font-weight: 500;
+            transition: 0.2s;
+            position: relative;
+        }
+        .nav-link-custom:hover {
+            color: #2563eb;
+        }
+        /* Reminder Popup */
+        .reminder-popup {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1050;
+            max-width: 360px;
+            animation: slideInUp 0.3s ease-out;
+            box-shadow: 0 20px 35px -10px rgba(0,0,0,0.2);
+        }
+        @keyframes slideInUp {
+            from {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        .cart-summary-card {
+            background: #f8fafc;
+            border-radius: 24px;
+        }
+        footer {
+            font-size: 0.8rem;
+        }
+        .assam-badge {
+            background: #16653420;
+            color: #166534;
+            font-size: 0.7rem;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Elegant Sticky Header with thin blue gradient line -->
+<header class="sticky-header py-2">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-between">
+            <!-- Logo + Brand -->
+            <div class="d-flex align-items-center gap-2">
+                <i class="fas fa-hard-hat fa-2x" style="color: #2563eb;"></i>
+                <span class="fw-bold fs-4 gradient-text">HardwareHub</span>
+                <span class="badge assam-badge rounded-pill"><i class="fas fa-map-marker-alt me-1"></i>Guwahati, Assam</span>
+            </div>
+            <!-- Navigation Menu -->
+            <div class="d-none d-md-flex gap-4">
+                <a href="#" class="nav-link-custom text-decoration-none" id="navHome"><i class="fas fa-home me-1"></i>Home</a>
+                <a href="#" class="nav-link-custom text-decoration-none" id="navStores"><i class="fas fa-store me-1"></i>Stores</a>
+                <a href="#" class="nav-link-custom text-decoration-none" id="navProducts"><i class="fas fa-tools me-1"></i>Products</a>
+            </div>
+            <!-- Right side: Login & Cart -->
+            <div class="d-flex align-items-center gap-3">
+                <span id="userGreetingHeader" class="small fw-semibold d-none d-sm-inline"></span>
+                <button id="loginBtnHeader" class="btn btn-sm btn-outline-primary rounded-pill px-3"><i class="fas fa-user-circle"></i> Login</button>
+                <div class="cart-preview-badge" id="cartIconBtn">
+                    <i class="fas fa-shopping-bag fa-lg" style="color: #1e3a5f;"></i>
+                    <span id="headerCartCount" class="cart-count-bubble">0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Hero Splash with Guwahati & Assam relevant imagery -->
+<div class="container mt-4">
+    <div class="hero-splash p-4 p-md-5 text-white" style="background: linear-gradient(107deg, #0a2b3e 0%, #1a4a6f 100%);">
+        <div class="row align-items-center">
+            <div class="col-md-7">
+                <h1 class="display-5 fw-bold"><i class="fas fa-truck-fast me-2"></i>Hardware Store Guwahati</h1>
+                <p class="lead">Cement • Steel • Bricks • Stones • Electricals — Book from nearby stores in Maligaon, Paltan Bazar, Uzan Bazar & more. Pay 10% advance.</p>
+                <button class="btn btn-light rounded-pill px-4 fw-semibold" id="exploreBtn">Explore Products <i class="fas fa-arrow-right ms-2"></i></button>
+            </div>
+            <div class="col-md-5 d-none d-md-block">
+                <img src="https://images.unsplash.com/photo-1590077428593-55bb1e1ccb2a?w=500&h=300&fit=crop" class="img-fluid rounded-4 shadow-lg" alt="Guwahati river view" style="object-fit: cover; height: 200px; width: 100%;">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Main App Container -->
+<div class="container py-4">
+    <div class="row g-4">
+        <!-- LEFT COL: Stores + Products -->
+        <div class="col-lg-8">
+            <!-- Nearby Stores Section - Guwahati specific -->
+            <div class="glass-card p-3 mb-4" id="storesSection">
+                <div class="d-flex justify-content-between align-items-center flex-wrap">
+                    <h5 class="mb-2"><i class="fas fa-map-marker-alt me-2 text-danger"></i>Nearby Hardware Stores in Guwahati</h5>
+                    <div class="d-flex gap-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="radiusFilter" id="radius5km" value="5" checked>
+                            <label class="form-check-label" for="radius5km">Within 5km</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="radiusFilter" id="radius10km" value="10">
+                            <label class="form-check-label" for="radius10km">Within 10km</label>
+                        </div>
+                        <button id="refreshStoresBtn" class="btn btn-sm btn-outline-secondary rounded-pill"><i class="fas fa-sync-alt"></i> Refresh</button>
+                    </div>
+                </div>
+                <div id="storesContainer" class="row g-3 mt-2">
+                    <div class="col-12 text-center py-3"><div class="spinner-border text-primary" role="status"></div> Locating stores in Guwahati...</div>
+                </div>
+            </div>
+
+            <!-- Product Catalog with Assam construction imagery -->
+            <div class="glass-card p-3" id="productsSection">
+                <h5 class="mb-3"><i class="fas fa-tools me-2 text-warning"></i>Construction & Hardware Products</h5>
+                <div class="row g-3" id="productList"></div>
+            </div>
+        </div>
+
+        <!-- RIGHT COL: Cart Sidebar -->
+        <div class="col-lg-4 d-none d-lg-block">
+            <div class="glass-card p-3 sticky-top" style="top: 90px;">
+                <h5><i class="fas fa-shopping-cart me-2"></i>Cart Summary <span id="desktopCartCount" class="badge bg-secondary rounded-pill">0</span></h5>
+                <hr>
+                <div id="desktopCartItems" class="small mb-3" style="max-height: 300px; overflow-y: auto;">
+                    <p class="text-muted">Cart is empty</p>
+                </div>
+                <div class="border-top pt-2">
+                    <div class="d-flex justify-content-between fw-bold">
+                        <span>Total:</span>
+                        <span id="desktopCartTotal">₹0</span>
+                    </div>
+                    <div class="d-flex justify-content-between text-success">
+                        <span>Advance (10%):</span>
+                        <span id="desktopAdvance">₹0</span>
+                    </div>
+                </div>
+                <button id="checkoutBtnDesktop" class="btn btn-soft-primary w-100 mt-3" disabled><i class="fas fa-lock"></i> Proceed to Book</button>
+            </div>
+        </div>
+    </div>
+    <footer class="text-center mt-5 text-muted small">
+        <i class="fas fa-shield-alt"></i> Advance booking • 10% now • 90% on delivery • Serving Guwahati, Assam
+    </footer>
+</div>
+
+<!-- Offcanvas Cart -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="cartOffcanvasLabel"><i class="fas fa-shopping-bag"></i> Your Cart</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div id="offcanvasCartItems" class="mb-3"></div>
+        <div class="border-top pt-3">
+            <div class="d-flex justify-content-between fw-bold">
+                <span>Total:</span>
+                <span id="offcanvasTotal">₹0</span>
+            </div>
+            <div class="d-flex justify-content-between text-success">
+                <span>Advance (10%):</span>
+                <span id="offcanvasAdvance">₹0</span>
+            </div>
+            <button id="checkoutBtnOffcanvas" class="btn btn-soft-primary w-100 mt-3" disabled>Proceed to Book</button>
+        </div>
+    </div>
+</div>
+
+<!-- Login Modal (OTP) -->
+<div class="modal fade" id="loginModal" data-bs-backdrop="static" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content glass-card border-0">
+            <div class="modal-header border-0">
+                <h5 class="modal-title fw-bold"><i class="fas fa-mobile-alt me-2"></i>Login Required to Book</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div id="loginStep1">
+                    <label class="form-label fw-semibold">Mobile Number</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text bg-white"><i class="fas fa-phone"></i></span>
+                        <input type="tel" id="mobileNumber" class="form-control" placeholder="10 digits mobile" maxlength="10">
+                    </div>
+                    <button id="sendOtpBtn" class="btn btn-soft-primary w-100">Send OTP</button>
+                </div>
+                <div id="loginStep2" style="display:none;">
+                    <label class="form-label fw-semibold">Enter 6-digit OTP</label>
+                    <input type="text" id="otpCode" class="form-control mb-3" placeholder="Any 6 digits works" maxlength="6">
+                    <button id="verifyOtpBtn" class="btn btn-success w-100">Verify & Login</button>
+                </div>
+                <div id="loginMessage" class="mt-3 small text-center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Payment Modal -->
+<div class="modal fade" id="paymentModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content glass-card">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fab fa-google-pay me-2"></i>Simulate 10% Advance Payment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p class="text-muted">Advance amount: <strong id="modalAdvanceAmount">₹0</strong></p>
+                <div class="mb-3">
+                    <label class="form-label">UPI ID / Card (demo)</label>
+                    <input type="text" class="form-control" placeholder="1234 5678 9012 3456" value="4242 4242 4242 4242">
+                </div>
+                <div class="row">
+                    <div class="col-6"><label>Expiry</label><input class="form-control" value="12/28"></div>
+                    <div class="col-6"><label>CVV</label><input class="form-control" value="123"></div>
+                </div>
+                <button id="simulatePayBtn" class="btn btn-primary w-100 mt-3 btn-soft-primary">✅ Simulate Payment</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Reminder Popup (shows after 20 sec) -->
+<div id="reminderPopup" class="reminder-popup" style="display: none;">
+    <div class="card shadow-lg border-0 rounded-4" style="background: rgba(255,255,255,0.98); backdrop-filter: blur(8px);">
+        <div class="card-body p-3">
+            <div class="d-flex justify-content-between align-items-start">
+                <div>
+                    <i class="fas fa-shopping-cart text-primary me-2"></i>
+                    <strong>Still shopping?</strong>
+                    <p class="small mb-1 mt-1">Your cart has <span id="reminderCartCount">0</span> items. Ready to checkout?</p>
+                </div>
+                <button id="closeReminderBtn" class="btn-close"></button>
+            </div>
+            <div class="mt-2 d-flex gap-2">
+                <button id="reminderCheckoutBtn" class="btn btn-sm btn-soft-primary flex-fill">Checkout Now</button>
+                <button id="reminderContinueBtn" class="btn btn-sm btn-outline-secondary flex-fill">Add More Items</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // ----------------------------- MOCK DATA - Guwahati, Assam Coordinates (approx: 26.1445° N, 91.7362° E) ---------------------------------
+    const MOCK_STORES = [
+        { id: 1, name: "Paltan Bazar Hardware & Cement", lat: 26.1500, lng: 91.7400, address: "Paltan Bazar, Guwahati", img: "https://images.unsplash.com/photo-1581092335871-4c4b1b5f6f1c?w=80&h=80&fit=crop" },
+        { id: 2, name: "Uzan Bazar Steel & Bricks", lat: 26.1600, lng: 91.7450, address: "Uzan Bazar, Guwahati", img: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=80&h=80&fit=crop" },
+        { id: 3, name: "Maligaon Electrical & Sanitary", lat: 26.1300, lng: 91.7250, address: "Maligaon, Guwahati", img: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=80&h=80&fit=crop" },
+        { id: 4, name: "Fancy Bazaar Hardware Hub", lat: 26.1550, lng: 91.7350, address: "Fancy Bazaar, Guwahati", img: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=80&h=80&fit=crop" },
+        { id: 5, name: "Beltola Timber & Stone", lat: 26.1200, lng: 91.7150, address: "Beltola, Guwahati", img: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=80&h=80&fit=crop" }
+    ];
+    
+    // Products with Assam construction relevant images
+    const PRODUCTS = [
+        { id: "p1", name: "Cement (50kg)", price: 380, unit: "bag", img: "https://images.unsplash.com/photo-1581092335871-4c4b1b5f6f1c?w=300&h=180&fit=crop" },
+        { id: "p2", name: "Steel Bar (12mm)", price: 620, unit: "piece", img: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=300&h=180&fit=crop" },
+        { id: "p3", name: "Red Brick", price: 9, unit: "piece", img: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=300&h=180&fit=crop" },
+        { id: "p4", name: "Crushed Stone (1 ton)", price: 850, unit: "ton", img: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=300&h=180&fit=crop" },
+        { id: "p5", name: "Electrical Wire (1 roll)", price: 1450, unit: "roll", img: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=300&h=180&fit=crop" },
+        { id: "p6", name: "Modular Switch", price: 120, unit: "piece", img: "https://images.unsplash.com/photo-1563207153-f403bf289096?w=300&h=180&fit=crop" }
+    ];
+    
+    // Guwahati center coordinates
+    let userLocation = { lat: 26.1445, lng: 91.7362 };
+    let currentFilterRadius = 5;
+    let cart = {};
+    let loggedInUser = localStorage.getItem("loggedInUser") || null;
+    let reminderTimer = null;
+    let reminderShown = false;
+
+    // Helper functions
+    function getDistance(lat1, lon1, lat2, lon2) {
+        const R = 6371;
+        const dLat = (lat2 - lat1) * Math.PI / 180;
+        const dLon = (lon2 - lon1) * Math.PI / 180;
+        const a = Math.sin(dLat/2)**2 + Math.cos(lat1 * Math.PI/180) * Math.cos(lat2 * Math.PI/180) * Math.sin(dLon/2)**2;
+        return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    }
+
+    function filterStores(radius) {
+        return MOCK_STORES.map(s => ({ ...s, distance: parseFloat(getDistance(userLocation.lat, userLocation.lng, s.lat, s.lng).toFixed(1)) }))
+            .filter(s => s.distance <= radius);
+    }
+
+    function renderStores() {
+        const container = document.getElementById("storesContainer");
+        container.innerHTML = `<div class="col-12 text-center py-3"><div class="spinner-border text-primary spinner-border-sm"></div> Finding stores in Guwahati...</div>`;
+        setTimeout(() => {
+            const stores = filterStores(currentFilterRadius);
+            if (stores.length === 0) {
+                container.innerHTML = `<div class="col-12 alert alert-warning">⚠️ No hardware stores within ${currentFilterRadius} km in Guwahati.</div>`;
+                return;
+            }
+            container.innerHTML = stores.map(store => `
+                <div class="col-md-6 col-lg-4">
+                    <div class="store-card p-2 h-100 d-flex gap-2 align-items-center">
+                        <img src="${store.img}" width="55" height="55" class="rounded-3" style="object-fit: cover;">
+                        <div class="flex-grow-1"><strong>${store.name}</strong><br><span class="small">${store.address}</span><br><span class="badge-distance badge">${store.distance} km</span></div>
+                        <button class="btn btn-sm btn-outline-success rounded-pill select-store" data-name="${store.name}">Select</button>
+                    </div>
+                </div>`).join('');
+            document.querySelectorAll('.select-store').forEach(btn => btn.addEventListener('click', (e) => alert(`✅ ${btn.dataset.name} selected as your pickup store in Guwahati.`)));
+        }, 400);
+    }
+
+    function renderProducts() {
+        const container = document.getElementById("productList");
+        container.innerHTML = PRODUCTS.map(p => `
+            <div class="col-sm-6 col-md-4">
+                <div class="product-card h-100">
+                    <div class="product-img-placeholder" style="background-image: url('${p.img}'); height: 150px; background-size: cover;"></div>
+                    <div class="p-3">
+                        <h6 class="fw-bold">${p.name}</h6>
+                        <p class="text-success fw-bold">₹${p.price}</p>
+                        <div class="input-group input-group-sm">
+                            <input type="number" id="qty-${p.id}" class="form-control text-center" min="1" max="100" value="1">
+                            <button class="btn btn-dark btn-sm add-cart" data-id="${p.id}" data-name="${p.name}" data-price="${p.price}"><i class="fas fa-cart-plus"></i> Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>`).join('');
+        document.querySelectorAll('.add-cart').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const id = btn.dataset.id, name = btn.dataset.name, price = parseFloat(btn.dataset.price);
+                let qty = parseInt(document.getElementById(`qty-${id}`).value) || 1;
+                if (qty > 100) qty = 100;
+                if (qty < 1) qty = 1;
+                addToCart(id, name, price, qty);
+                document.getElementById(`qty-${id}`).value = 1;
+                resetReminderTimer(); // reset 20 sec timer on cart action
+            });
+        });
+    }
+
+    function addToCart(id, name, price, qty) {
+        if (cart[id]) cart[id].quantity = Math.min(100, cart[id].quantity + qty);
+        else cart[id] = { product: { id, name, price }, quantity: qty };
+        saveCart();
+        updateAllCartUI();
+    }
+
+    function removeCartItem(id) { delete cart[id]; saveCart(); updateAllCartUI(); resetReminderTimer(); }
+
+    function getTotalAndAdvance() {
+        let total = Object.values(cart).reduce((sum, item) => sum + (item.quantity * item.product.price), 0);
+        return { total, advance: total * 0.1 };
+    }
+
+    function updateAllCartUI() {
+        const { total, advance } = getTotalAndAdvance();
+        const itemCount = Object.values(cart).reduce((sum, i) => sum + i.quantity, 0);
+        document.querySelectorAll('#headerCartCount, #desktopCartCount').forEach(el => el.innerText = itemCount);
+        document.getElementById("desktopCartTotal").innerText = `₹${total}`;
+        document.getElementById("desktopAdvance").innerText = `₹${advance.toFixed(2)}`;
+        document.getElementById("offcanvasTotal").innerText = `₹${total}`;
+        document.getElementById("offcanvasAdvance").innerText = `₹${advance.toFixed(2)}`;
+        const cartHtml = Object.values(cart).map(item => `<div class="d-flex justify-content-between align-items-center mb-2"><span>${item.product.name} x${item.quantity}</span><span>₹${item.quantity * item.product.price} <button class="btn btn-sm text-danger remove-item" data-id="${item.product.id}"><i class="fas fa-trash"></i></button></span></div>`).join('');
+        const emptyMsg = '<p class="text-muted">Cart empty</p>';
+        document.getElementById("desktopCartItems").innerHTML = cartHtml || emptyMsg;
+        document.getElementById("offcanvasCartItems").innerHTML = cartHtml || emptyMsg;
+        const disableState = itemCount === 0;
+        document.getElementById("checkoutBtnDesktop").disabled = disableState;
+        document.getElementById("checkoutBtnOffcanvas").disabled = disableState;
+        document.querySelectorAll('.remove-item').forEach(btn => btn.addEventListener('click', (e) => removeCartItem(btn.dataset.id)));
+        
+        // Update reminder popup cart count if visible
+        const reminderCountSpan = document.getElementById("reminderCartCount");
+        if (reminderCountSpan) reminderCountSpan.innerText = itemCount;
+    }
+
+    function saveCart() { localStorage.setItem("hardwareCart", JSON.stringify(cart)); }
+    function loadCart() { const saved = localStorage.getItem("hardwareCart"); if(saved) { cart = JSON.parse(saved); updateAllCartUI(); } }
+
+    // Reminder Popup Logic (20 seconds)
+    function showReminderPopup() {
+        const itemCount = Object.values(cart).reduce((sum, i) => sum + i.quantity, 0);
+        if (itemCount > 0 && !reminderShown) {
+            const popup = document.getElementById("reminderPopup");
+            document.getElementById("reminderCartCount").innerText = itemCount;
+            popup.style.display = "block";
+            reminderShown = true;
+        }
+    }
+    
+    function resetReminderTimer() {
+        if (reminderTimer) clearTimeout(reminderTimer);
+        reminderShown = false;
+        const popup = document.getElementById("reminderPopup");
+        if (popup) popup.style.display = "none";
+        // Start new timer if cart not empty
+        if (Object.keys(cart).length > 0) {
+            reminderTimer = setTimeout(() => {
+                showReminderPopup();
+            }, 20000); // 20 seconds
+        }
+    }
+    
+    function closeReminder() {
+        document.getElementById("reminderPopup").style.display = "none";
+        reminderShown = true; // prevent immediate re-show, but timer can reset later
+        if (reminderTimer) clearTimeout(reminderTimer);
+    }
+
+    // Login & Checkout
+    function updateUserUI() {
+        const greetingElem = document.getElementById("userGreetingHeader");
+        const loginBtn = document.getElementById("loginBtnHeader");
+        if (loggedInUser) {
+            greetingElem.innerHTML = `<i class="fas fa-user-check"></i> Hi, ${loggedInUser}`;
+            loginBtn.innerHTML = `<i class="fas fa-user"></i> ${loggedInUser}`;
+            loginBtn.disabled = true;
+        } else {
+            greetingElem.innerHTML = '';
+            loginBtn.innerHTML = `<i class="fas fa-user-circle"></i> Login`;
+            loginBtn.disabled = false;
+        }
+    }
+
+    function initLoginModal() {
+        const sendBtn = document.getElementById("sendOtpBtn");
+        const verifyBtn = document.getElementById("verifyOtpBtn");
+        const step1 = document.getElementById("loginStep1");
+        const step2 = document.getElementById("loginStep2");
+        const msgDiv = document.getElementById("loginMessage");
+        sendBtn.onclick = () => {
+            const mobile = document.getElementById("mobileNumber").value.trim();
+            if (!/^\d{10}$/.test(mobile)) { msgDiv.innerHTML = '<span class="text-danger">Invalid 10-digit mobile</span>'; return; }
+            step1.style.display = "none"; step2.style.display = "block";
+            msgDiv.innerHTML = '<span class="text-success">OTP sent (any 6 digits works)</span>';
+        };
+        verifyBtn.onclick = () => {
+            const otp = document.getElementById("otpCode").value.trim();
+            if (otp.length === 6 && /^\d+$/.test(otp)) {
+                loggedInUser = "Guest User";
+                localStorage.setItem("loggedInUser", loggedInUser);
+                updateUserUI();
+                bootstrap.Modal.getInstance(document.getElementById('loginModal')).hide();
+                step1.style.display = "block"; step2.style.display = "none";
+                document.getElementById("mobileNumber").value = ""; document.getElementById("otpCode").value = "";
+                msgDiv.innerHTML = "";
+                if (pendingCheckout) { pendingCheckout = false; proceedToPayment(); }
+            } else { msgDiv.innerHTML = '<span class="text-danger">Enter valid 6-digit OTP</span>'; }
+        };
+    }
+    let pendingCheckout = false;
+    function proceedToPayment() {
+        const { total, advance } = getTotalAndAdvance();
+        if (total === 0) { alert("Cart is empty"); return; }
+        document.getElementById("modalAdvanceAmount").innerText = `₹${advance.toFixed(2)}`;
+        new bootstrap.Modal(document.getElementById('paymentModal')).show();
+    }
+    function checkoutFlow() {
+        if (!loggedInUser) {
+            pendingCheckout = true;
+            new bootstrap.Modal(document.getElementById('loginModal')).show();
+        } else {
+            proceedToPayment();
+        }
+    }
+    document.getElementById("simulatePayBtn").addEventListener("click", () => {
+        const { total, advance } = getTotalAndAdvance();
+        bootstrap.Modal.getInstance(document.getElementById('paymentModal')).hide();
+        setTimeout(() => {
+            alert(`✅ Advance ₹${advance.toFixed(2)} paid! Remaining 90% (₹${(total - advance).toFixed(2)}) due on delivery. Booking confirmed in Guwahati!`);
+            cart = {}; saveCart(); updateAllCartUI(); closeReminder();
+        }, 100);
+    });
+    document.getElementById("checkoutBtnDesktop").addEventListener("click", checkoutFlow);
+    document.getElementById("checkoutBtnOffcanvas").addEventListener("click", checkoutFlow);
+    document.getElementById("loginBtnHeader").addEventListener("click", () => new bootstrap.Modal(document.getElementById('loginModal')).show());
+    document.getElementById("cartIconBtn").addEventListener("click", () => new bootstrap.Offcanvas(document.getElementById('cartOffcanvas')).show());
+    document.getElementById("exploreBtn").addEventListener("click", () => document.getElementById("productsSection").scrollIntoView({ behavior: "smooth" }));
+    document.getElementById("closeReminderBtn").addEventListener("click", closeReminder);
+    document.getElementById("reminderContinueBtn").addEventListener("click", closeReminder);
+    document.getElementById("reminderCheckoutBtn").addEventListener("click", () => { closeReminder(); checkoutFlow(); });
+    
+    // Geolocation - Guwahati focused (fallback to Guwahati center)
+    function initGeo() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                pos => { userLocation = { lat: pos.coords.latitude, lng: pos.coords.longitude }; renderStores(); },
+                () => { renderStores(); }
+            );
+        } else { renderStores(); }
+    }
+    document.querySelectorAll('input[name="radiusFilter"]').forEach(r => r.addEventListener("change", () => { currentFilterRadius = parseInt(document.querySelector('input[name="radiusFilter"]:checked').value); renderStores(); }));
+    document.getElementById("refreshStoresBtn").addEventListener("click", () => renderStores());
+    
+    loadCart();
+    renderProducts();
+    initGeo();
+    initLoginModal();
+    updateUserUI();
+    
+    // Start reminder timer on page load if cart has items
+    if (Object.keys(cart).length > 0) {
+        resetReminderTimer();
+    }
+</script>
+</body>
+</html>

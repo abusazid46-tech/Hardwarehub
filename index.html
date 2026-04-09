@@ -111,35 +111,44 @@
             background: linear-gradient(105deg, #152c4a, #1d4ed8);
         }
         /* Store Card - Dark text */
-        .store-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(4px);
-            border-radius: 20px;
-            transition: 0.25s;
-            border: 1px solid rgba(0,0,0,0.08);
-            cursor: pointer;
-        }
-        .store-card:hover {
-            border-color: #3b82f6;
-            background: white;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        }
-        .store-card.selected {
-            border: 2px solid #3b82f6;
-            background: rgba(59, 130, 246, 0.1);
-            backdrop-filter: blur(8px);
-            box-shadow: 0 8px 20px rgba(59,130,246,0.2);
-        }
-        .store-card strong, .store-card .small, .store-card span {
-            color: #1e293b !important;
-        }
-        .badge-distance {
-            background: #e8f3ed;
-            color: #166534 !important;
-            font-weight: 600;
-            backdrop-filter: blur(2px);
-        }
+.store-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(4px);
+    border-radius: 20px;
+    transition: 0.25s;
+    border: 1px solid rgba(0,0,0,0.08);
+    cursor: pointer;
+}
+.store-card:hover {
+    border-color: #3b82f6;
+    background: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+.store-card.selected {
+    border: 2px solid #3b82f6;
+    background: rgba(59, 130, 246, 0.1);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 8px 20px rgba(59,130,246,0.2);
+}
+/* Store Name - Dark Navy/Black */
+.store-card strong {
+    color: #0f172a !important;
+}
+/* Address Text - Dark Blue */
+.store-card .small {
+    color: #1e3a8a !important;
+    font-weight: 500;
+}
+/* Distance Badge - Red */
+.badge-distance {
+    background: #fee2e2 !important;
+    color: #dc2626 !important;
+    font-weight: 700;
+    backdrop-filter: blur(2px);
+    padding: 4px 12px;
+    border-radius: 30px;
+}
         .cart-preview-badge {
             position: relative;
             cursor: pointer;

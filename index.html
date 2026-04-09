@@ -110,10 +110,9 @@
             transform: scale(0.97);
             background: linear-gradient(105deg, #152c4a, #1d4ed8);
         }
-        /* Store Card - Dark text */
+        /* Store Card - Dark text (NO BLUR) */
 .store-card {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(4px);
+    background: rgba(255, 255, 255, 0.98);
     border-radius: 20px;
     transition: 0.25s;
     border: 1px solid rgba(0,0,0,0.08);
@@ -127,27 +126,28 @@
 }
 .store-card.selected {
     border: 2px solid #3b82f6;
-    background: rgba(59, 130, 246, 0.1);
-    backdrop-filter: blur(8px);
+    background: rgba(59, 130, 246, 0.08);
     box-shadow: 0 8px 20px rgba(59,130,246,0.2);
 }
-/* Store Name - Dark Navy/Black */
+/* Store Name - Dark Navy/Black - CRISP */
 .store-card strong {
     color: #0f172a !important;
+    font-weight: 700;
 }
-/* Address Text - Dark Blue */
+/* Address Text - Dark Blue - CRISP */
 .store-card .small {
     color: #1e3a8a !important;
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 0.8rem;
 }
-/* Distance Badge - Red */
+/* Distance Badge - Red - CRISP */
 .badge-distance {
     background: #fee2e2 !important;
     color: #dc2626 !important;
     font-weight: 700;
-    backdrop-filter: blur(2px);
     padding: 4px 12px;
     border-radius: 30px;
+    display: inline-block;
 }
         .cart-preview-badge {
             position: relative;
